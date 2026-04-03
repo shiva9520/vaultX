@@ -110,6 +110,6 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     paddingHorizontal: 30,
-    paddingBottom: 50,
+    paddingBottom: 60,
   },
 });

@@ -91,9 +91,8 @@ const CardsScreen = () => {
                  <Text style={[styles.controlDesc, { color: themeColors.textSecondary }]}>Temporarily lock your card.</Text>
                </View>
             </View>
-            <Switch value={isFrozen} onValueChange={setIsFrozen} trackColor={{ true: '#EF4444', false: themeColors.glass }} />
+            <Switch value={isFrozen} onValueChange={setIsFrozen} trackColor={{ true: '#22C55E', false: themeColors.glass }} />
          </View>
-]\
          <View style={[styles.controlItem, { backgroundColor: themeColors.card, borderColor: themeColors.glass }]}>
             <View style={styles.controlInfo}>
                <View style={[styles.iconBox, { backgroundColor: 'rgba(91, 46, 255, 0.1)' }]}>
@@ -104,7 +103,7 @@ const CardsScreen = () => {
                  <Text style={[styles.controlDesc, { color: themeColors.textSecondary }]}>Reveal 3-digit security code.</Text>
                </View>
             </View>
-            <Switch value={showCVV} onValueChange={(val) => { setShowCVV(val); if(val && flip.value === 0) flipCard(); }} trackColor={{ true: themeColors.primary, false: themeColors.glass }} />
+            <Switch value={showCVV} onValueChange={(val) => { setShowCVV(val); if(val && flip.value === 0) flipCard(); }} trackColor={{ true: '#22C55E', false: themeColors.glass }} />
          </View>
       </View>
     </ScreenWrapper>

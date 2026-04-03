@@ -2,10 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import DashboardScreen from '../screens/DashboardScreen';
 import TransactionsScreen from '../screens/TransactionsScreen';
-<<<<<<< HEAD
 import CardsScreen from '../screens/CardsScreen';
-=======
->>>>>>> 31c1ef512a3a26754c201f44fe62cdb10dbb2b1b
 import ProfileScreen from '../screens/ProfileScreen';
 import TabIcon from '../components/TabIcon';
 import CustomBottomTab from '../components/CustomBottomTab';
@@ -33,7 +30,6 @@ const BottomTabs = () => {
         component={TransactionsScreen}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
-<<<<<<< HEAD
             <TabIcon focused={focused} icon="file-text" color={color} size={size} />
           ),
         }}
@@ -44,17 +40,10 @@ const BottomTabs = () => {
         component={CardsScreen}
         options={{
           tabBarIcon: ({ focused, color, size }) => (
-=======
->>>>>>> 31c1ef512a3a26754c201f44fe62cdb10dbb2b1b
             <TabIcon focused={focused} icon="credit-card" color={color} size={size} />
           ),
         }}
       />
-<<<<<<< HEAD
-
-=======
-      
->>>>>>> 31c1ef512a3a26754c201f44fe62cdb10dbb2b1b
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}

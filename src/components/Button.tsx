@@ -19,7 +19,7 @@ const animatedStyle = useAnimatedStyle(() => ({
   onPress={onPress}
 >
   <Animated.View style={[styles.button, animatedStyle]}>
-    <Text>{title}</Text>
+    <Text style={styles.text}>{title}</Text>
   </Animated.View>
 </Pressable>
   );
@@ -37,5 +37,6 @@ const styles = StyleSheet.create({
   text: {
     color: '#fff',
     fontWeight: '600',
+    fontSize: 16,
   },
 });

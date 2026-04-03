@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { useColorScheme } from 'react-native';
+import { useColorScheme, StatusBar } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export type ThemePreference = 'system' | 'light' | 'dark';
@@ -47,6 +47,11 @@ export const ThemeProvider = ({ children }: any) => {
 
   return (
     <ThemeContext.Provider value={{ themePreference, setThemePreference, dark, setDark }}>
+      <StatusBar 
+        barStyle={dark ? 'light-content' : 'dark-content'} 
+        backgroundColor="transparent"
+        translucent={true}
+      />
       {children}
     </ThemeContext.Provider>
   );

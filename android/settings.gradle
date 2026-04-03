@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 pluginManagement {
     repositories {
         google()
@@ -16,10 +15,6 @@ dependencyResolutionManagement {
         maven { url uri("../node_modules/@react-native-async-storage/async-storage/android/local_repo") }
     }
 }
-=======
-pluginManagement { includeBuild("../node_modules/@react-native/gradle-plugin") }
-plugins { id("com.facebook.react.settings") }
->>>>>>> 31c1ef512a3a26754c201f44fe62cdb10dbb2b1b
 extensions.configure(com.facebook.react.ReactSettingsExtension){ ex -> ex.autolinkLibrariesFromCommand() }
 rootProject.name = 'vaultX'
 include ':app'

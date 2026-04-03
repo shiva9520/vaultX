@@ -3,6 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import { useThemeColors } from '../hooks/useThemeColors';
 import { colors } from '../theme/color';
 import Animated, { useAnimatedStyle, withSpring, withTiming } from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const { width } = Dimensions.get('window');
 
@@ -49,8 +50,9 @@ const TabButton = ({ options, isFocused, onPress, onLongPress, route }: any) => 
 
 const CustomBottomTab = ({ state, descriptors, navigation }: any) => {
   const themeColors = useThemeColors();
+  const insets = useSafeAreaInsets();
   return (
-    <View style={[styles.container, { backgroundColor: themeColors.card, borderColor: themeColors.glass }]}>
+    <View style={[styles.container, { backgroundColor: themeColors.card, borderColor: themeColors.glass, bottom: insets.bottom + 16 }]}>
       {state.routes.map((route: any, index: number) => {
         const { options } = descriptors[route.key];
         const isFocused = state.index === index;
@@ -94,16 +96,14 @@ export default CustomBottomTab;
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    backgroundColor: 'rgba(26, 26, 29, 0.95)', // matches colors.card with slight transparency
+    backgroundColor: 'rgba(26, 26, 29, 0.95)',
     height: 72,
     borderRadius: 36,
     marginHorizontal: 24,
-    marginBottom: 24,
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 8,
     position: 'absolute',
-    bottom: 0,
     left: 0,
     right: 0,
     elevation: 10,
@@ -118,14 +118,15 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    height: 56,
-    borderRadius: 28,
-    marginHorizontal: 4,
+    //height: 56,
+    //borderRadius: 28,
+    //marginHorizontal: 4,
     paddingVertical: 8,
   },
   activeBackground: {
     backgroundColor: 'rgba(91, 46, 255, 0.15)', // Light primary color for active tab
-    borderRadius: 28,
+    //borderRadius: 28,
+    borderRadius: 25, 
   },
   iconContainer: {
     alignItems: 'center',

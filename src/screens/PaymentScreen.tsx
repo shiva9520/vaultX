@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import { addTransaction } from '../redux/slices/transactionsSlice';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const PaymentScreen = () => {
   const themeColors = useThemeColors();
@@ -22,6 +23,7 @@ const PaymentScreen = () => {
     if (val === 'backspace') {
       setAmount(prev => (prev.length > 1 ? prev.slice(0, -1) : '0'));
     } else {
+      if (amount.length > 9) return;
       setAmount(prev => (prev === '0' ? val : prev + val));
     }
   };
@@ -64,7 +66,8 @@ const PaymentScreen = () => {
   );
 
   return (
-    <ScreenWrapper>
+    <ScreenWrapper withTabBar={false}>
+      <View style={{flex:1}}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Icon name="close" size={28} color={themeColors.textPrimary} />
@@ -86,12 +89,23 @@ const PaymentScreen = () => {
         entering={ZoomIn.duration(400)}
         style={styles.amountContainer}
       >
-        <Text style={[styles.currency, { color: themeColors.textPrimary }]}>
-          ₹
-        </Text>
-        <Text style={[styles.amount, { color: themeColors.textPrimary }]}>
-          {amount}
-        </Text>
+        <View style={styles.amountRow}>
+          <Text style={[styles.currency, { color: themeColors.textPrimary }]}>
+            ₹
+          </Text>
+          <Text
+            style={[styles.amount, { color: themeColors.textPrimary }]}
+            numberOfLines={1}
+            adjustsFontSizeToFit
+          >
+            {amount}
+          </Text>
+        </View>
+        {amount.length > 9 && (
+          <Text style={styles.warningText}>
+            Maximum limit of 9 digits exceeded
+          </Text>
+        )}
       </Animated.View>
 
       <View style={styles.keypad}>
@@ -118,6 +132,7 @@ const PaymentScreen = () => {
           style={{ marginLeft: 10 }}
         />
       </TouchableOpacity>
+      </View>
     </ScreenWrapper>
   );
 };
@@ -141,7 +156,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#5B2EFF',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 15,
+    marginBottom: 10,
   },
   avatarText: {
     color: '#fff',
@@ -157,24 +172,37 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   amountContainer: {
-    flexDirection: 'row',
+    //flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 40,
-    marginBottom: 40,
+    marginBottom: 20,
+    minHeight:100
   },
   currency: {
-    fontSize: 40,
+    fontSize: 30,
     fontWeight: '700',
     marginRight: 10,
+  },
+  amountRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  warningText: {
+    color: '#FF3B30',
+    fontSize: 14,
+    marginTop: 5,
+    fontWeight: '500',
   },
   amount: {
     fontSize: 60,
     fontWeight: '700',
+    maxWidth:'85%'
   },
   keypad: {
     alignItems: 'center',
-    marginBottom: 40,
+    marginBottom: 30,
   },
   row: {
     flexDirection: 'row',

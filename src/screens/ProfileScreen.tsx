@@ -7,12 +7,15 @@ import {
   LayoutAnimation,
   Platform,
   UIManager,
+  ScrollView,
+  Alert,
 } from 'react-native';
 import { useThemeColors } from '../hooks/useThemeColors';
 import { colors } from '../theme/color';
 import Icon from 'react-native-vector-icons/Feather';
 import { ThemeContext, ThemePreference } from '../context/ThemeContext';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
@@ -33,6 +36,17 @@ const ProfileScreen = () => {
   const handleThemeChange = (pref: ThemePreference) => {
     setThemePreference(pref);
   };
+
+  const clearAppData = async (): Promise<void> => {
+  try {
+    await AsyncStorage.clear();
+    Alert.alert('Success', 'AsyncStorage has been fully cleared');
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      Alert.alert('Error clearing storage:', error.message);
+    }
+  }
+};
 
   const renderRadioButton = (label: string, value: ThemePreference) => {
     const isSelected = themePreference === value;
@@ -71,7 +85,7 @@ const ProfileScreen = () => {
     <SafeAreaView
       style={[styles.safeArea, { backgroundColor: themeColors.background }]}
     >
-      <View style={styles.container}>
+     
         <View style={styles.header}>
           <Text
             style={[styles.headerTitle, { color: themeColors.textPrimary }]}
@@ -79,6 +93,11 @@ const ProfileScreen = () => {
             Profile
           </Text>
         </View>
+         <ScrollView
+        style={styles.container}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContent}
+      >
         <View style={styles.content}>
           <View
             style={[
@@ -167,6 +186,56 @@ const ProfileScreen = () => {
               color={themeColors.textSecondary}
             />
           </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.menuItem, { backgroundColor: themeColors.card }]}
+            onPress={clearAppData}
+          >
+            <View
+              style={[
+                styles.menuIconContainer,
+                { backgroundColor: themeColors.glass },
+              ]}
+            >
+              <Icon
+                name="refresh-cw"
+                size={20}
+                color={themeColors.textPrimary}
+              />
+            </View>
+            <Text style={[styles.menuText, { color: themeColors.textPrimary }]}>
+              What's new?
+            </Text>
+            <Icon
+              name="chevron-right"
+              size={20}
+              color={themeColors.textSecondary}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.menuItem, { backgroundColor: themeColors.card }]}
+          >
+            <View
+              style={[
+                styles.menuIconContainer,
+                { backgroundColor: themeColors.glass },
+              ]}
+            >
+              <Icon
+                name="compass"
+                size={20}
+                color={themeColors.textPrimary}
+              />
+            </View>
+            <Text style={[styles.menuText, { color: themeColors.textPrimary }]}>
+              Explore Products
+            </Text>
+            <Icon
+              name="chevron-right"
+              size={20}
+              color={themeColors.textSecondary}
+            />
+          </TouchableOpacity>
           <TouchableOpacity
             style={[styles.menuItem, { backgroundColor: themeColors.card }]}
           >
@@ -211,7 +280,7 @@ const ProfileScreen = () => {
             </Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -219,6 +288,7 @@ const ProfileScreen = () => {
 const styles = StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: colors.background },
   container: { flex: 1 },
+  scrollContent: { paddingBottom: 40 },
   header: { padding: 20, paddingTop: 40 },
   headerTitle: { fontSize: 28, fontWeight: 'bold', color: colors.textPrimary },
   content: { padding: 20 },
@@ -314,7 +384,8 @@ const styles = StyleSheet.create({
   },
   radioLabel: { color: colors.textPrimary, fontSize: 16, fontWeight: '500' },
   logoutItem: {
-    marginTop: 20,
+    //marginTop: 20,
+    marginBottom:40,
     borderWidth: 1,
     borderColor: 'rgba(239, 68, 68, 0.2)',
   },

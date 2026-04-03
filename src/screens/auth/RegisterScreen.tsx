@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     marginTop: 24,
+    marginBottom: 10,
   },
   loginText: {
     color: '#8e8e93',
