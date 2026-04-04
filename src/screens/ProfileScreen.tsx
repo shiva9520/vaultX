@@ -17,6 +17,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { styles } from '../styles/ProfileScreen';
 import auth from '@react-native-firebase/auth';
 import { useNavigation } from '@react-navigation/native';
+import { logoutUser } from '../services/firebase';
 if (Platform.OS === 'android') {
   if (UIManager.setLayoutAnimationEnabledExperimental) {
     UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -82,14 +83,11 @@ const ProfileScreen = () => {
   };
   
   const onLogout = () =>{
-    auth().signOut()
-    .then(() => {
-      Alert.alert('Logged Out', 'You have been logged out successfully.');
-      navigation.replace('Login');
-    })
-    .catch(error => {
-      Alert.alert('Logout Failed', error.message);
-    });
+    try {
+      logoutUser();
+    } catch (error:any) {
+      Alert.alert('Error occurred while logging out:', error);
+    }
   }
   return (
     <SafeAreaView

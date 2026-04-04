@@ -17,8 +17,10 @@ import Animated, {
 import { styles } from '../../styles/RegisterScreen';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import auth, { getAuth } from '@react-native-firebase/auth';
 import { RegisterData } from '../../types/RegisterData';
+import { registerUser } from '../../services/firebase';
+import  Icon from 'react-native-vector-icons/FontAwesome';
+import { colors } from '../../theme/color';
 const RegisterScreen = () => {
   const navigation = useNavigation<any>();
   const [registerData, setRegisterData] = useState<RegisterData>({
@@ -27,6 +29,9 @@ const RegisterScreen = () => {
     mpin: '',
     confirmMpin: '',
   });
+  const [errors, setErrors] = useState<Partial<Record<keyof RegisterData, string>>>({});
+const [isMpinVisible, setIsMpinVisible] = useState(false);
+const [isConfirmMpinVisible, setIsConfirmMpinVisible] = useState(false);
   const handleChange = (field: keyof RegisterData, value: string) => {
     setRegisterData(prev => ({
       ...prev,
@@ -34,32 +39,37 @@ const RegisterScreen = () => {
     }));
   };
 
- const onRegister = () => { 
-  if (registerData.mpin !== registerData.confirmMpin) {
-    Alert.alert('Error', 'MPINs do not match!');
-    return;
-  }
+const onRegister = async () => {
+    const newErrors: Partial<Record<keyof RegisterData, string>> = {};
  
-  auth()
-    .createUserWithEmailAndPassword(registerData.email, registerData.mpin)
-    .then(() => {
-      Alert.alert('Success', 'Account created successfully!');
-      navigation.replace('Main');
-    })
-    .catch(error => {
-      // Fix: Specifically check error codes and use error.message for the string
+    if (!registerData.fullName.trim()) newErrors.fullName = 'Full name is required.';
+    if (!registerData.email.trim()) newErrors.email = 'Email is required.';
+    if (registerData.mpin.length < 6) newErrors.mpin = 'MPIN must be at least 6 digits.';
+    if (registerData.confirmMpin.length < 6) newErrors.confirmMpin = 'MPIN must be at least 6 digits.';
+    if (registerData.mpin !== registerData.confirmMpin) {
+      newErrors.confirmMpin = 'MPINs do not match!';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    setErrors({});
+
+    try {
+      await registerUser(registerData.email, registerData.mpin);
+    } catch (error: any) {
       if (error.code === 'auth/email-already-in-use') {
-        Alert.alert('Error', 'That email address is already in use!');
+        newErrors.email = 'This email is already registered.';
       } else if (error.code === 'auth/invalid-email') {
-        Alert.alert('Error', 'That email address is invalid!');
-      } else if (error.code === 'auth/weak-password') {
-        Alert.alert('Error', 'The MPIN must be at least 6 characters long.');
+        newErrors.email = 'Please enter a valid email.';
       } else {
-        // Fix: Use error.message to avoid the "ReadableNativeMap" crash
-        Alert.alert('Registration Failed', error.message);
+        newErrors.email = 'Registration failed. Try again.';
       }
-    });
-};
+      setErrors(newErrors);
+    }
+  };
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -94,32 +104,63 @@ const RegisterScreen = () => {
                 onChangeText={(val: string) => handleChange('fullName', val)}
                 placeholderTextColor="#888"
               />
+              {errors.fullName && <Text style={styles.errorText}>{errors.fullName}</Text>}
             </View>
             <View style={styles.inputWrapper}>
               <Input
                 placeholder="Enter Email Address"
                 value={registerData.email}
+                keyboardType="email-address"
+                autoCapitalize="none"
+                autoCorrect={false}
                 onChangeText={(val: string) => handleChange('email', val)}
                 placeholderTextColor="#888"
               />
+              {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
             </View>
             <View style={styles.inputWrapper}>
               <Input
                 placeholder="Create MPIN"
-                secureTextEntry
+                keyboardType="number-pad"
+              maxLength={6}
+                secureTextEntry={!isMpinVisible}
                 placeholderTextColor="#888"
                 value={registerData.mpin}
                 onChangeText={(val: string) => handleChange('mpin', val)}
               />
+              <Pressable
+      onPress={() => setIsMpinVisible(!isMpinVisible)}
+      style={{ position: 'absolute', right: 15, top:15 }}
+    >
+      <Icon
+        name={isMpinVisible ? 'eye' : 'eye-slash'}
+        size={18}
+        color={isMpinVisible ? colors.primary : colors.textSecondary}
+      />
+    </Pressable>
+              {errors.mpin && <Text style={styles.errorText}>{errors.mpin}</Text>}
             </View>
             <View style={styles.inputWrapper}>
               <Input
+              keyboardType="number-pad"
+              maxLength={6}
                 placeholder="Confirm MPIN"
-                secureTextEntry
+                secureTextEntry={!isConfirmMpinVisible}
                 placeholderTextColor="#888"
                 value={registerData.confirmMpin}
                 onChangeText={(val: string) => handleChange('confirmMpin', val)}
               />
+              <Pressable
+      onPress={() => setIsConfirmMpinVisible(!isConfirmMpinVisible)}
+      style={{ position: 'absolute', right: 15, top: 15 }}
+    >
+      <Icon
+        name={isConfirmMpinVisible ? 'eye' : 'eye-slash'}
+        size={18}
+        color={isConfirmMpinVisible ? colors.primary : colors.textSecondary}
+      />
+    </Pressable>
+              {errors.confirmMpin && <Text style={styles.errorText}>{errors.confirmMpin}</Text>}
             </View>
           </Animated.View>
         </View>

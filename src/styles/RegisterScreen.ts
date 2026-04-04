@@ -63,4 +63,9 @@ export const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700',
   },
+  errorText: {
+  color: '#FF4D4D',  
+  marginTop: 4,
+  marginLeft: 4,
+},
 });
