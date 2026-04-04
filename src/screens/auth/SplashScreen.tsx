@@ -1,10 +1,6 @@
 import React, { useEffect } from 'react';
 import { Text, StyleSheet } from 'react-native';
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming
-} from 'react-native-reanimated';
+import Animated, {useSharedValue,useAnimatedStyle,withTiming} from 'react-native-reanimated';
 import { useNavigation } from '@react-navigation/native';
 import { colors } from '../../theme/color';
 

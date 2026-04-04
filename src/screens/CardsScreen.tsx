@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Switch, TouchableOpacity } from 'react-native';
+import { View, Text, Switch, TouchableOpacity } from 'react-native';
 import ScreenWrapper from '../components/ScreenWrapper';
 import Animated, { interpolate, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { useThemeColors } from '../hooks/useThemeColors';
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import { styles } from '../styles/CardScreen';
 const CardsScreen = () => {
   const themeColors = useThemeColors();
   const [isFrozen, setIsFrozen] = useState(false);
@@ -45,7 +45,6 @@ const CardsScreen = () => {
       </View>
 
       <TouchableOpacity activeOpacity={0.9} onPress={flipCard} style={styles.cardWrapper}>
-        {/* Front of Card */}
         <Animated.View style={[styles.card, frontStyle, isFrozen && styles.frozenCard]}>
           <View style={styles.cardGlow} />
           <View style={styles.cardHeader}>
@@ -112,150 +111,3 @@ const CardsScreen = () => {
 
 export default CardsScreen;
 
-const styles = StyleSheet.create({
-  header: {
-    marginBottom: 20,
-    marginTop: 10,
-  },
-  title: {
-    fontSize: 26,
-    fontWeight: '700',
-    letterSpacing: 0.5,
-  },
-  cardWrapper: {
-    height: 220,
-    width: '100%',
-    alignItems: 'center',
-    marginBottom: 30,
-  },
-  card: {
-    width: '100%',
-    height: 220,
-    backgroundColor: '#2A1F45',
-    borderRadius: 24,
-    padding: 24,
-    justifyContent: 'space-between',
-    elevation: 8,
-    shadowColor: '#5B2EFF',
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.3,
-    shadowRadius: 15,
-    overflow: 'hidden',
-  },
-  frozenCard: {
-    backgroundColor: '#1E293B',
-    opacity: 0.9,
-  },
-  cardGlow: {
-    position: 'absolute',
-    top: -50,
-    right: -50,
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-    backgroundColor: 'rgba(91, 46, 255, 0.4)',
-    opacity: 0.8,
-  },
-  cardHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  cardBrand: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: '700',
-    fontStyle: 'italic',
-  },
-  cardNumberContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 20,
-  },
-  cardNumber: {
-    color: '#fff',
-    fontSize: 22,
-    fontWeight: '600',
-    letterSpacing: 2,
-  },
-  cardFooter: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 20,
-  },
-  cardLabel: {
-    color: 'rgba(255,255,255,0.6)',
-    fontSize: 10,
-    textTransform: 'uppercase',
-    letterSpacing: 1,
-    marginBottom: 4,
-  },
-  cardValue: {
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: '600',
-    letterSpacing: 1,
-  },
-  blackStrip: {
-    position: 'absolute',
-    top: 30,
-    left: 0,
-    right: 0,
-    height: 45,
-    backgroundColor: '#111',
-  },
-  cvvStrip: {
-    backgroundColor: '#eee',
-    height: 35,
-    marginTop: 70,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    paddingHorizontal: 15,
-  },
-  cvvText: {
-    color: '#000',
-    fontWeight: 'bold',
-    fontSize: 16,
-    letterSpacing: 2,
-  },
-  backInfoText: {
-    color: 'rgba(255,255,255,0.4)',
-    fontSize: 9,
-    textAlign: 'center',
-    marginTop: 15,
-    paddingHorizontal: 20,
-  },
-  controlsSection: {
-    marginTop: 10,
-  },
-  controlItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 16,
-    borderRadius: 16,
-    marginBottom: 16,
-    borderWidth: 1,
-  },
-  controlInfo: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  iconBox: {
-    width: 44,
-    height: 44,
-    borderRadius: 12,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 15,
-  },
-  controlName: {
-    fontSize: 16,
-    fontWeight: '600',
-    marginBottom: 4,
-  },
-  controlDesc: {
-    fontSize: 12,
-  },
-});

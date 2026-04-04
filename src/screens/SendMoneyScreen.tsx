@@ -5,13 +5,8 @@ import Animated, { FadeInUp } from 'react-native-reanimated';
 import { useThemeColors } from '../hooks/useThemeColors';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
-
-const dummyContacts = [
-  { id: '1', name: 'James Doe', phone: '+1 234 567 8900' },
-  { id: '2', name: 'Sarah Smith', phone: '+1 987 654 3210' },
-  { id: '3', name: 'Mike Johnson', phone: '+1 555 123 4567' },
-  { id: '4', name: 'Emma Wilson', phone: '+1 444 987 6543' },
-];
+import { styles } from '../styles/SendMoneyScreen';
+import { dummyContacts } from '../utils/dummyContacts';
 
 const SendMoneyScreen = () => {
   const themeColors = useThemeColors();
@@ -60,14 +55,3 @@ const SendMoneyScreen = () => {
 
 export default SendMoneyScreen;
 
-const styles = StyleSheet.create({
-  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginTop: 10 },
-  title: { fontSize: 20, fontWeight: '700' },
-  subtitle: { marginTop: 20, fontSize: 16 },
-  contactItem: { flexDirection: 'row', padding: 16, borderRadius: 16, marginBottom: 16, alignItems: 'center', borderWidth: 1 },
-  avatar: { width: 44, height: 44, borderRadius: 22, backgroundColor: '#5B2EFF', alignItems: 'center', justifyContent: 'center', marginRight: 16 },
-  avatarText: { color: '#fff', fontSize: 18, fontWeight: '600' },
-  contactDetails: { flex: 1 },
-  contactName: { fontSize: 16, fontWeight: '600', marginBottom: 4 },
-  contactPhone: { fontSize: 13 },
-});

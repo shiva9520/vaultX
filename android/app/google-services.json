@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "323980094481",
-    "project_id": "vaultx-b0df9",
-    "storage_bucket": "vaultx-b0df9.firebasestorage.app"
+    "project_number": "913908840799",
+    "project_id": "vaultx-d59c1",
+    "storage_bucket": "vaultx-d59c1.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:323980094481:android:510ebdcca2b9d4d8a455b0",
+        "mobilesdk_app_id": "1:913908840799:android:43ccf2d8afa3134bec5eea",
         "android_client_info": {
-          "package_name": "com.android.application"
+          "package_name": "com.vaultx"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCZcgXWPPzsHs6wipRvWQYq-yQxUMzPbaY"
+          "current_key": "AIzaSyDOWOiUGRn0YMceSa3O282w2af0C15fAlM"
         }
       ],
       "services": {
