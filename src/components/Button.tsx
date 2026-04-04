@@ -1,27 +1,41 @@
 import React from 'react';
-import { Pressable, Text, StyleSheet } from 'react-native';
+import { Pressable, Text, StyleSheet, ActivityIndicator, ViewStyle } from 'react-native';
 import { colors } from '../theme/color';
 import Animated, { useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 
-const Button = ({ title, onPress }: any) => {
-    const scale = useSharedValue(1);
+// Define interface for better TypeScript support
+interface ButtonProps {
+  title: string;
+  onPress: () => void;
+  loading?: boolean;
+  disabled?: boolean;
+  style?: ViewStyle;
+}
 
-const animatedStyle = useAnimatedStyle(() => ({
-  transform: [{ scale: scale.value }],
-}));
+const Button = ({ title, onPress, loading, disabled }: ButtonProps) => {
+  const scale = useSharedValue(1);
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: scale.value }],
+  }));
+
   return (
-    // <Pressable style={styles.button} onPress={onPress}>
-    //   <Text style={styles.text}>{title}</Text>
-    // </Pressable>
     <Pressable
-  onPressIn={() => (scale.value = withSpring(0.95))}
-  onPressOut={() => (scale.value = withSpring(1))}
-  onPress={onPress}
->
-  <Animated.View style={[styles.button, animatedStyle]}>
-    <Text style={styles.text}>{title}</Text>
-  </Animated.View>
-</Pressable>
+      onPressIn={() => !loading && (scale.value = withSpring(0.95))}
+      onPressOut={() => (scale.value = withSpring(1))}
+      onPress={onPress}
+      // Disable the button when loading to prevent double-taps
+      disabled={disabled || loading} 
+    >
+      <Animated.View style={[styles.button, animatedStyle, (disabled || loading) && styles.disabled]}>
+        {loading ? (
+          // Standard loader that works on both iOS and Android
+          <ActivityIndicator color="#fff" size="small" />
+        ) : (
+          <Text style={styles.text}>{title}</Text>
+        )}
+      </Animated.View>
+    </Pressable>
   );
 };
 
@@ -33,6 +47,11 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 14,
     alignItems: 'center',
+    justifyContent: 'center', // Centers the loader/text
+    minHeight: 55, // Prevents the button from shrinking when the loader appears
+  },
+  disabled: {
+    opacity: 0.7, // Visual feedback that the button is locked
   },
   text: {
     color: '#fff',

@@ -52,7 +52,7 @@ export const styles = StyleSheet.create({
   buttonContainer: {
     paddingHorizontal: 30,
     paddingBottom: 50,
-    marginTop: 20, // Adds breathing room between form and button
+    marginTop: 20,  
   },
   registerContainer: {
     flexDirection: 'row',
@@ -68,5 +68,10 @@ export const styles = StyleSheet.create({
     color: '#5b2eff',
     fontSize: 15,
     fontWeight: '700',
+  },
+   errorText: {
+    color: '#FF4D4D',
+    marginTop: 4,
+    marginLeft: 4,
   },
 });

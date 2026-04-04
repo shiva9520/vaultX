@@ -1,7 +1,19 @@
-import React, { useState } from 'react';
-import {View,Text,KeyboardAvoidingView,Platform,Pressable,ScrollView,} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import Animated, {FadeInDown,FadeInUp,FadeIn,} from 'react-native-reanimated';
+import React, { useCallback, useState } from 'react';
+import {
+  View,
+  Text,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  ScrollView,
+  ActivityIndicator,
+} from 'react-native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
+import Animated, {
+  FadeInDown,
+  FadeInUp,
+  FadeIn,
+} from 'react-native-reanimated';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import { styles } from '../../styles/LoginScreen';
@@ -9,15 +21,15 @@ import { LoginData } from '../../types/LoginData';
 import { loginUser } from '../../services/firebase';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { colors } from '../../theme/color';
+import { set } from '@react-native-firebase/app/dist/module/internal/web/firebaseDatabase';
 const LoginScreen = () => {
   const navigation = useNavigation<any>();
   const [LoginData, setLoginData] = useState<LoginData>({
     email: '',
     mpin: '',
   });
-  const [errors, setErrors] = useState<{ email?: string; mpin?: string }>(
-    {},
-  );
+  const [errors, setErrors] = useState<{ email?: string; mpin?: string }>({});
+  const [loading, setLoading] = useState(false);
   const [ismpinVisible, setIsmpinVisible] = useState(false);
   const handleChange = (field: keyof LoginData, value: string) => {
     setLoginData(prev => ({
@@ -28,16 +40,18 @@ const LoginScreen = () => {
   const onLogin = async () => {
     const newErrors: { email?: string; mpin?: string } = {};
     if (!LoginData.email.trim()) newErrors.email = 'Email is required.';
-    if (!LoginData.mpin.trim())newErrors.mpin = 'mpin is required.';
+    if (!LoginData.mpin.trim()) newErrors.mpin = 'MPIN is required.';
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
+    setLoading(true);
     setErrors({});
     try {
-       loginUser(LoginData.email, LoginData.mpin);
-    } catch (error: any) { 
+      await loginUser(LoginData.email, LoginData.mpin);
+      setLoading(false);
+    } catch (error: any) {
       if (error.code === 'auth/invalid-credential') {
         newErrors.mpin = 'Invalid Email or mpin.';
       } else if (error.code === 'auth/too-many-requests') {
@@ -46,7 +60,7 @@ const LoginScreen = () => {
       setErrors(newErrors);
     }
   };
-
+ 
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -87,15 +101,13 @@ const LoginScreen = () => {
                 onChangeText={(val: string) => handleChange('email', val)}
               />
               {errors.email && (
-                <Text style={{ color: '#FF4D4D', fontSize: 12, marginTop: 4 }}>
-                  {errors.email}
-                </Text>
+                <Text style={styles.errorText}>{errors.email}</Text>
               )}
             </View>
             <View style={styles.inputWrapper}>
               <Input
-              keyboardType="number-pad"
-              maxLength={6}
+                keyboardType="number-pad"
+                maxLength={6}
                 placeholder="Enter MPIN"
                 secureTextEntry={!ismpinVisible}
                 placeholderTextColor="#888"
@@ -114,22 +126,16 @@ const LoginScreen = () => {
                     size={20}
                     color={
                       ismpinVisible ? colors.primary : colors.textSecondary
-                    } // Matching your theme's purple
+                    }
                   />
                 </Text>
               </Pressable>
               {errors.mpin && (
-                <Text style={{ color: '#FF4D4D', fontSize: 12, marginTop: 4 }}>
-                  {errors.mpin}
-                </Text>
+                <Text style={styles.errorText}>{errors.mpin}</Text>
               )}
             </View>
 
-            <Pressable
-              onPress={() => {
-                /* Handle Forgot MPIN */
-              }}
-            >
+            <Pressable onPress={() => {}}>
               <Text style={styles.forgotText}>Forgot MPIN?</Text>
             </Pressable>
           </Animated.View>
@@ -139,7 +145,12 @@ const LoginScreen = () => {
           entering={FadeInUp.duration(800).delay(400).springify()}
           style={styles.buttonContainer}
         >
-          <Button title="Login" onPress={onLogin} />
+          <Button 
+  title="Login" 
+  loading={loading} 
+  onPress={onLogin} 
+/>
+
           <View style={styles.registerContainer}>
             <Text style={styles.registerText}>Don't have an account? </Text>
             <Pressable onPress={() => navigation.navigate('Register')}>

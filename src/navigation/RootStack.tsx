@@ -34,8 +34,7 @@ const RootStack = () => {
           <Stack.Screen name="Main" component={BottomTabs} />
           <Stack.Screen name="SendMoney" component={SendMoneyScreen} />
           <Stack.Screen name="Payment" component={PaymentScreen} />
-          <Stack.Screen name="Receipt" component={ReceiptScreen} /> 
-          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Receipt" component={ReceiptScreen} />  
         </>
       ) : ( 
         <>
