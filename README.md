@@ -1,97 +1,132 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 💰 VaultX – Finance Management App (React Native)
 
-# Getting Started
+VaultX is a **React Native CLI–based finance management mobile application** designed to help users manage transactions, track spending, and simulate digital payments with a modern and intuitive UI.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+---
 
-## Step 1: Start Metro
+## 🚀 Features
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+- 🔐 **Firebase Authentication**
+  - Email & Password Login / Register
+  - Persistent user session
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+- 🏠 **Dashboard**
+  - Balance overview
+  - Quick action shortcuts
+  - Recent transactions
 
-```sh
-# Using npm
+- 💸 **Transactions**
+  - View transaction history
+  - Add new transactions
+  - Managed using Redux Toolkit
+
+- 💳 **Cards**
+  - Card management UI (ready for future integrations)
+
+- 👤 **Profile**
+  - User profile screen
+  - Extendable for account settings
+
+- 🔄 **State Persistence**
+  - Uses `redux-persist` + AsyncStorage
+  - Data persists across app restarts
+
+- 🎨 **UI & Animations**
+  - Custom bottom tab navigation
+  - Smooth animations with Reanimated
+  - Light/Dark theme support
+
+---
+
+## 🛠️ Tech Stack
+
+- React Native (CLI)
+- TypeScript
+- Redux Toolkit
+- redux-persist + AsyncStorage
+- Firebase Authentication
+- React Navigation (Stack + Bottom Tabs)
+- React Native Reanimated
+- React Native Vector Icons
+
+---
+
+## 🔐 Authentication Flow
+
+- App starts with Splash Screen  
+- Firebase checks auth state  
+- If authenticated → Navigate to Dashboard  
+- If not → Show Login / Register  
+- Session persists automatically  
+
+---
+
+## 📸 App Screenshots
+
+> Replace these images with your actual screenshots
+
+### Splash Screen
+<p float="left">
+  <img src="screenshots/splash.png" width="30%" />
+</p>
+
+### Authentication
+<p float="left">
+  <img src="screenshots/login.png" width="30%" />
+  <img src="screenshots/register.png" width="30%" />
+</p>
+
+### Dashboard
+<p float="left">
+  <img src="screenshots/dashboard.png" width="30%" />
+</p>
+
+### Transactions
+<p float="left">
+  <img src="screenshots/transactions.png" width="30%" />
+  <img src="screenshots/send-money.png" width="30%" />
+</p>
+
+### Payment & Receipt
+<p float="left">
+  <img src="screenshots/payment.png" width="30%" />
+  <img src="screenshots/receipt.png" width="30%" />
+</p>
+
+---
+
+## 🎥 Demo Video
+
+[▶️ Watch Demo](https://your-demo-video-link.com)
+
+---
+
+## ⚙️ Installation & Setup
+
+### Prerequisites
+- Node.js
+- Android Studio
+- React Native CLI
+
+---
+
+### Steps
+
+```bash
+# Clone the repository
+git clone https://github.com/shiva9520/vaultX.git
+
+# Navigate into project
+cd vaultX
+
+# Install dependencies
+npm install
+
+# Start Metro
 npm start
 
-# OR using Yarn
-yarn start
-```
-
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
+# Run on Android
 npm run android
 
-# OR using Yarn
-yarn android
-```
-
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+# Run on iOS (Mac only)
 npm run ios
-
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
