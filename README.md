@@ -121,7 +121,7 @@ VaultX is a **React Native CLI–based finance management mobile application** d
 ---
 
 ## 🎥 Demo Video
-https://github.com/user-attachments/assets/1cb69456-b7db-4369-ba60-4ae89c0e8e6f
+https://github.com/user-attachments/assets/72c144f4-2cce-4f4f-80a3-c903358b26bd
 ---
 
 ## ⚙️ Installation & Setup
