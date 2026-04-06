@@ -61,35 +61,62 @@ VaultX is a **React Native CLI–based finance management mobile application** d
 
 ---
 
-## 📸 App Screenshots
+## 📸 App src/screenshots
 
 ### Splash Screen
 <p float="left">
-  <img src="screenshots/1.jpeg" width="30%" />
+  <img src="src/src/screenshots/1.jpeg" width="20%" />
 </p>
 
 ### Authentication
 <p float="left">
-  <img src="screenshots/login.png" width="30%" />
-  <img src="screenshots/register.png" width="30%" />
+  <img src="src/screenshots/2.jpeg" width="20%" />
+  <img src="src/screenshots/3.jpeg" width="20%" />
 </p>
 
 ### Dashboard
 <p float="left">
-  <img src="screenshots/dashboard.png" width="30%" />
-</p>
-
-### Transactions
-<p float="left">
-  <img src="screenshots/transactions.png" width="30%" />
-  <img src="screenshots/send-money.png" width="30%" />
+  <img src="src/screenshots/5.jpeg" width="20%" />
+  <img src="src/screenshots/7.jpeg" width="20%" />
+  <img src="src/screenshots/6.jpeg" width="20%" />
+  <img src="src/screenshots/8.jpeg" width="20%" />
 </p>
 
 ### Payment & Receipt
 <p float="left">
-  <img src="screenshots/payment.png" width="30%" />
-  <img src="screenshots/receipt.png" width="30%" />
+  <img src="src/screenshots/9.jpeg" width="20%" />
+  <img src="src/screenshots/10.jpeg" width="20%" />
+  <img src="src/screenshots/11.jpeg" width="20%" />
+  <img src="src/screenshots/12.jpeg" width="20%" />
 </p>
+
+### Transactions
+<p float="left">
+  <img src="src/screenshots/13.jpeg" width="20%" />
+  <img src="src/screenshots/14.jpeg" width="20%" />
+  <img src="src/screenshots/15.jpeg" width="20%" />
+  <img src="src/screenshots/16.jpeg" width="20%" />
+</p>
+
+### Card Screen
+<p float="left">
+  <img src="src/screenshots/17.jpeg" width="20%" />
+  <img src="src/screenshots/18.jpeg" width="20%" />
+  <img src="src/screenshots/19.jpeg" width="20%" />
+  <img src="src/screenshots/20.jpeg" width="20%" />
+  <img src="src/screenshots/21.jpeg" width="20%" />
+  <img src="src/screenshots/22.jpeg" width="20%" />
+  <img src="src/screenshots/23.jpeg" width="20%" />
+</p>
+
+### Profile Screen
+<p float="left">
+  <img src="src/screenshots/24.jpeg" width="20%" />
+  <img src="src/screenshots/25.jpeg" width="20%" />
+  <img src="src/screenshots/26.jpeg" width="20%" />
+</p>
+
+
 
 ---
 
