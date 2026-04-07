@@ -65,7 +65,7 @@ VaultX is a **React Native CLI–based finance management mobile application** d
 
 ### Splash Screen
 <p float="left">
-  <img src="src/src/screenshots/1.jpeg" width="20%" />
+  <img src="src/screenshots/1.jpeg" width="20%" />
 </p>
 
 ### Authentication
